@@ -16,26 +16,19 @@ export const getNiceStringsNumber = (
   }, 0);
 };
 
+export const isNiceString = (string: string) => {
+  return (
+    hasMinNumberOfVowels(string, 3) &&
+    hasLetterThatAppearsTwiceInARow(string) &&
+    !hasForbiddenStrings(string, ['ab', 'cd', 'pq', 'xy'])
+  );
+};
+
 export const isNiceString2 = (string: string) => {
-  //1 condition
   return (
     hasPairOfTwoLettersThatApearsTwice(string) &&
     hasTwoSameLettersDividedByLetter(string)
   );
-};
-
-export const isNiceString = (string: string) => {
-  //1 condition
-  if (!hasMinNumberOfVowels(string, 3)) {
-    return false;
-  }
-  // 2 condition
-  if (!hasLetterThatAppearsTwiceInARow(string)) {
-    return false;
-  }
-
-  // 3 condition
-  return !hasForbiddenStrings(string, ['ab', 'cd', 'pq', 'xy']);
 };
 
 export const hasMinNumberOfVowels = (
