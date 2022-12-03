@@ -26,6 +26,7 @@ export const funA = (input: string): number => {
     const itemsPerCompartment = count / 2;
     const left = allItems.slice(0, itemsPerCompartment);
     const right = allItems.slice(itemsPerCompartment);
+
     const commonItem = left.find((value) => right.includes(value))[0];
     const code = getCode(commonItem);
 

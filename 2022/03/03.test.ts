@@ -22,21 +22,16 @@ describe('3', () => {
 });
 
 describe('3', () => {
-  it('B1', () => {
-    const e = 'vJrwpWtwJgWrhcsFMMfFFhFp';
-    expect(funB(e)).toBe(16);
-  });
-
   it('B2', () => {
     const example =
-      'vJrwpWtwJgWrhcsFMMfFFhFp\njqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL\nPmmdzqPrVvPwwTWBwg\nwMqvLMZHhHMvwLHjbvcjnnSBnvTQFn\nttgJtRGJQctTZtZT\nCrZsJsPPZsGzwwsLwLmpwMDw';
+      'vJrwpWtwJgWrhcsFMMfFFhFp\njqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL\nPmmdzqPrVvPwwTWBwg';
 
     const r = funB(example);
 
-    expect(r).toEqual(157);
+    expect(r).toBe(18);
   });
 
   it('B input', () => {
-    expect(funB(input)).toBe(8105);
+    expect(funB(input)).toBe(2363);
   });
 });
