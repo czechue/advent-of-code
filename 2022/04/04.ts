@@ -1,16 +1,21 @@
 const parseStringToArr = (input: string): any[] => {
   return input.split('\n');
 };
-//"7-7,8-42"
+
+const getElfAreaByPair = (pair: any) => {
+  const [elf1, elf2] = pair.split(',');
+  const [elf1Start, elf1End] = elf1.split('-');
+  const [elf2Start, elf2End] = elf2.split('-');
+  return {
+    elf1Start: Number(elf1Start),
+    elf1End: Number(elf1End),
+    elf2Start: Number(elf2Start),
+    elf2End: Number(elf2End),
+  };
+};
 
 const overlappedFullyFully = (pair: any): boolean => {
-  const [elf1, elf2] = pair.split(',');
-  let [elf1Start, elf1End] = elf1.split('-');
-  let [elf2Start, elf2End] = elf2.split('-');
-  elf1Start = Number(elf1Start);
-  elf1End = Number(elf1End);
-  elf2Start = Number(elf2Start);
-  elf2End = Number(elf2End);
+  const { elf1Start, elf1End, elf2Start, elf2End } = getElfAreaByPair(pair);
 
   if (elf1Start === elf2Start) {
     return true;
@@ -55,13 +60,7 @@ export const funB = (input: string) => {
     if (overlappedFullyFully(pair)) {
       overlap.push(pair);
     } else {
-      const [elf1, elf2] = pair.split(',');
-      let [elf1Start, elf1End] = elf1.split('-');
-      let [elf2Start, elf2End] = elf2.split('-');
-      elf1Start = Number(elf1Start);
-      elf1End = Number(elf1End);
-      elf2Start = Number(elf2Start);
-      elf2End = Number(elf2End);
+      const { elf1Start, elf1End, elf2Start, elf2End } = getElfAreaByPair(pair);
 
       if (elf1Start < elf2Start && elf1End >= elf2Start) {
         overlap.push(pair);
