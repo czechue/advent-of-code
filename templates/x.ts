@@ -1,5 +1,5 @@
 const parseStringToArr = (input: string): any[] => {
-  return input.split('\n\n');
+  return input.split('\n');
 };
 
 export const funA = (input: string) => {
