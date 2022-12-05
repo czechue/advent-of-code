@@ -1,5 +1,3 @@
-import { inputInstruction, inputStock } from './input';
-
 const parseStringToArr = (input: string): any[] => {
   return input
     .split('\n')
@@ -55,6 +53,15 @@ export const prepareInstruction = (input: string) => {
   );
 };
 
+const getTopStockLetters = (stock: any[]) => {
+  // @ts-ignore
+  return Object.values(stock)
+    .map((el) => (el as []).reverse())
+    .map((el) => el[0])
+    .slice(0, 9)
+    .join('');
+};
+
 export const funA = (inputStock: string, inputInstruction: string) => {
   const stock = prepareCratesStock(inputStock);
   const instruction = prepareInstruction(inputInstruction);
@@ -67,5 +74,20 @@ export const funA = (inputStock: string, inputInstruction: string) => {
     stock[to] = [...stock[to], ...addTo];
   }
 
-  return stock;
+  return getTopStockLetters(stock);
+};
+
+export const funB = (inputStock: string, inputInstruction: string) => {
+  const stock = prepareCratesStock(inputStock);
+  const instruction = prepareInstruction(inputInstruction);
+
+  for (const instr of instruction) {
+    const [count, from, to] = instr;
+    const removed = stock[from]?.slice(0, -count) || [];
+    const addTo = stock[from]?.slice().slice(removed.length) || [];
+    stock[from] = removed;
+    stock[to] = [...stock[to], ...addTo];
+  }
+
+  return getTopStockLetters(stock);
 };

@@ -1,9 +1,9 @@
 import { inputStock, inputInstruction } from './input';
-import { funA, prepareInstruction } from './05';
+import { funA, prepareInstruction, funB } from './05';
 
 describe('3', () => {
   test('A', () => {
-    expect(funA(inputStock, inputInstruction)).toBe(1);
+    expect(funA(inputStock, inputInstruction)).toBe('VJSFHWGFT');
   });
 
   test('A ex', () => {
@@ -15,11 +15,16 @@ describe('3', () => {
   });
 
   test('A ex 2', () => {
-    const instr = 'move 5 from 4 to 7';
-    expect(funA(inputStock, instr)).toStrictEqual({});
+    const instr = 'move 1 from 1 to 2';
+    expect(funB(inputStock, instr)).toStrictEqual('PWCBHBVGC');
   });
 
   test('B', () => {
-    expect(funA(inputStock, inputInstruction)).toBe(1);
+    expect(funB(inputStock, inputInstruction)).toBe('LCTQFBVZV');
+  });
+
+  test('B ex 1', () => {
+    const instr = 'move 5 from 4 to 7';
+    expect(funB(inputStock, instr)).toBe('WFCMHBBGC');
   });
 });
