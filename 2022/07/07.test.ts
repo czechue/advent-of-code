@@ -44,10 +44,6 @@ describe('07', () => {
     expect(dlqtffwFolder.children[3].data.name).toBe('zzbvdcf');
   });
 
-  // test('set correctly closest parent directory current directory', () => {
-  //   const example = '$ cd /\n$ ls\ndir fts\ndir jnwr';
-  // });
-
   test('all childrens sizes of "zddrb" are correctly summed up', () => {
     const zddrbFolder = funA(input).root.children[7];
     const childrenSum = zddrbFolder.children.reduce(

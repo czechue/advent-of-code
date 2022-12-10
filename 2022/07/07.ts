@@ -72,11 +72,12 @@ function recursiveSum(tree: Tree, currentDirectory: Node) {
     const size = currentDirectory.children.reduce((acc, node) => {
       return acc + node.data.size;
     }, 0);
+
     currentDirectory.data.size = size;
     // here we know that currentDirectory is a directory
     currentDirectory.data.type = 'directory';
-    const closestParent = tree.findClosestParent(currentDirectory);
 
+    const closestParent = tree.findClosestParent(currentDirectory);
     if (closestParent) {
       recursiveSum(tree, closestParent);
     }
@@ -92,9 +93,8 @@ export const funA = (input: string) => {
   let currentDirectory = tree.root;
 
   for (const command of arr) {
-    console.dir(command);
     if (command.startsWith('$ ls')) {
-      console.log('$ ls');
+      void undefined;
     } else if (command.startsWith('$ cd')) {
       const [, newDirectory] = command.split('cd ');
 
