@@ -53,10 +53,6 @@ describe('07', () => {
     expect(zddrbFolder.data.size).toBe(childrenSum);
   });
 
-  test('input', () => {
-    expect(funA(input)).toBe(1);
-  });
-
   test('getSumOfAtMost100000', () => {
     const tree = funA(input);
     expect(getSumOfAtMost100000(tree)).toBe(1642503);
