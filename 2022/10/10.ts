@@ -73,12 +73,6 @@ const drawCurrentCRTRow = (
   currentSpritePositionStart: number,
   cycle: number
 ) => {
-  console.log('drawCurrentCRTRow', {
-    currentCRTRow,
-    currentSpritePositionStart,
-    cycle,
-  });
-
   if (cycle === 1) {
     if ([-1, 0, 1].includes(currentSpritePositionStart)) {
       return '#';
@@ -104,20 +98,6 @@ const drawCurrentCRTRow = (
   }
 };
 
-const drawCurrentSpritePosition = (x: number) => {
-  let str = '';
-
-  for (let i = 1; i <= 40; i++) {
-    if (x === i || i - x === 1 || i - x === 2) {
-      str += '#';
-    } else {
-      str += '.';
-    }
-  }
-
-  return str;
-};
-
 export const funB = (input: string) => {
   const arr = parseStringToArr(input);
 
@@ -130,7 +110,6 @@ export const funB = (input: string) => {
   }> = [];
   let x = 1;
   let cycle = 1;
-  let currentSpritePosition = '###.....................................';
   let currentCRTRow = '';
 
   for (let i = 0; i < arr.length; i++) {
@@ -154,7 +133,6 @@ export const funB = (input: string) => {
       const addNumber = Number(addValue);
 
       const tempCRT = drawCurrentCRTRow(currentCRTRow, x, cycle);
-      console.log('tempCRT', tempCRT);
 
       result.push({
         xStart: x,
@@ -165,7 +143,7 @@ export const funB = (input: string) => {
       });
 
       const tempCRT2 = drawCurrentCRTRow(tempCRT, x, cycle + 1);
-      console.log('tempCRT', tempCRT2);
+
       result.push({
         xStart: x,
         xDuring: x,
@@ -175,10 +153,7 @@ export const funB = (input: string) => {
       });
 
       currentCRTRow = tempCRT2;
-      console.log('tempCRT', tempCRT2);
 
-      currentSpritePosition = drawCurrentSpritePosition(x + addNumber);
-      console.log(currentSpritePosition);
       x = x + addNumber;
       cycle = cycle + 2;
     }
@@ -194,7 +169,7 @@ export const renderPixels = (
   }>
 ) => {
   return pixels
-    .filter(({ cycle, currentCRTRow }) => {
+    .filter(({ cycle }) => {
       if (cycle % 40 === 0) return true;
     })
     .map(({ currentCRTRow }) => currentCRTRow);
