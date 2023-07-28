@@ -42,6 +42,9 @@ export const processedRound = (
   counter: number[]
 ) => {
   const holdingsAfterRound: Holdings = startingHoldings;
+  const addDivider = monkeys
+    .map((m) => m.testDivisibleBy)
+    .reduce((a, b) => a * b, 1);
 
   for (const holdingId in holdingsAfterRound) {
     const monkeyId = holdingId;
@@ -51,7 +54,6 @@ export const processedRound = (
     monkeyHoldings.forEach((holding) => {
       counter[Number(monkeyId)] = counter[Number(monkeyId)] + 1;
       const [, sign, symbol] = monkeyAttr.operation;
-      console.log('operations', { sign, symbol });
 
       let holdingAfterOperation: number | undefined = undefined;
       if (symbol === 'old') {
@@ -75,10 +77,10 @@ export const processedRound = (
         throw Error('holdingAfterOperation shouldnt be undefined');
       }
 
-      const afterDivideBy3 = Math.floor(holdingAfterOperation / 3);
+      const afterDivideBy3 = Number(holdingAfterOperation) % addDivider;
 
       const currentWorryLvlIsDivisibleByGivenNumber =
-        afterDivideBy3 % monkeyAttr.testDivisibleBy === 0;
+        afterDivideBy3 % Number(monkeyAttr.testDivisibleBy) === 0;
 
       if (currentWorryLvlIsDivisibleByGivenNumber) {
         const currentHoldings =
@@ -86,6 +88,7 @@ export const processedRound = (
 
         holdingsAfterRound[monkeyAttr.ifTrueThrowToMonkey] = [
           ...currentHoldings,
+
           afterDivideBy3,
         ];
       } else {
@@ -94,6 +97,7 @@ export const processedRound = (
 
         holdingsAfterRound[monkeyAttr.ifFalseThrowToMonkey] = [
           ...currentHoldings,
+
           afterDivideBy3,
         ];
       }
@@ -105,14 +109,14 @@ export const processedRound = (
   return holdingsAfterRound;
 };
 
-export const funA = (input: string) => {
+export const funB = (input: string) => {
   const monkeys = getMonkeys(input);
 
   let holdings = getStartingHoldings(monkeys);
 
   const counter = Array<number>(monkeys.length).fill(0);
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 10000; i++) {
     holdings = processedRound(holdings, monkeys, counter);
   }
 
